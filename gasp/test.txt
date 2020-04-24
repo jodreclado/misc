@@ -1,0 +1,11 @@
+This assignment does not include any particularly complicated logic or algorithms, 
+but it will require you to organize your code well and make effective use of the C 
+language and libraries. You will also have to explore the details of the C string 
+and file I/O libraries to discover how to do various operations that should already 
+be familiar from your programming experience in other languages, but which are 
+different in C. It is meant as an orientation to the Unix/Linux C programming environment. 
+You should do this assignment by yourself.
+
+The material that we have learned in lecture is not enough to complete this assignment. 
+It is expected that you will investigate the resources and libraries mentioned in this 
+document to learn about how to use them.

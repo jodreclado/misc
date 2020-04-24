@@ -1,0 +1,63 @@
+Script started on Mon 23 Apr 2018 11:39:26 PM PDT
+]0;rogersx@klaatu:~[?1034h[rogersx@klaatu ~]$ gdb gasp
+[?1034hGNU gdb (GDB) Red Hat Enterprise Linux 7.11-67.el7
+Copyright (C) 2016 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "x86_64-redhat-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from gasp...done.
+(gdb) break main
+Breakpoint 1 at 0x40092e: file gasp.c, line 39.
+(gdb) break 58
+Breakpoint 2 at 0x400a63: file gasp.c, line 58.
+(gdb) run you test.txt
+Starting program: /homes/rogersx/gasp you test.txt
+Missing separate debuginfos, use: debuginfo-install glibc-2.17-196.el7_4.2.x86_64
+
+Breakpoint 1, main (argc=3, argv=0x7fffffffdeb8) at gasp.c:39
+39	  ignoreCase = 0;
+(gdb) print argv[1]
+$1 = 0x7fffffffe179 "you"
+(gdb) continue
+Continuing.
+
+Breakpoint 2, main (argc=3, argv=0x7fffffffdeb8) at gasp.c:58
+58	    if (fp == NULL) {
+(gdb) backtrace
+#0  main (argc=3, argv=0x7fffffffdeb8) at gasp.c:58
+(gdb) list 58
+53	  } else {
+54	    strncpy(match, argv[i], MAXPATTERN);
+55	  }
+56	  for (i+=1; i < argc; i++) {
+57	    fp = fopen(argv[i], "r");
+58	    if (fp == NULL) {
+59	      fprintf(stderr, "gasp: unable to open %s\n", argv[i]);
+60	    } else {
+61	      parsefile(fp, match, argv[i]);
+62	      fclose(fp);  // frees the file pointer
+(gdb) print argv[i]
+$2 = 0x7fffffffe17d "test.txt"
+(gdb) print fp
+$3 = (FILE *) 0x603010
+(gdb) continue
+Continuing.
+test.txt:but it will require you to organize your code well and make effective use of the C 
+test.txt:be familiar from your programming experience in other languages, but which are 
+test.txt:You should do this assignment by yourself.
+test.txt:It is expected that you will investigate the resources and libraries mentioned in this 
+[Inferior 1 (process 7831) exited normally]
+(gdb) [K(gdb) q
+]0;rogersx@klaatu:~[rogersx@klaatu ~]$ exit
+exit
+
+Script done on Mon 23 Apr 2018 11:43:58 PM PDT
