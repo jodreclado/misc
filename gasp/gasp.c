@@ -76,7 +76,7 @@ int checkflags(int argc, char *argv[]) {
        ignoreCase = 1;
     } else if (strncmp(argv[i], "-n", 3) == 0) {
        numberLines = 1;
-    } return (i == (argc - 1)) ? -1 : i;  // invalid number of arguments
+    } else return (i == (argc - 1)) ? -1 : i;  // invalid number of arguments
   }
   return -1;  // we may assume options won't occur more than once
 }
