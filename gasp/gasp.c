@@ -20,8 +20,8 @@
 */
 
 /* Global variables (for command line options) */
-int ignoreCase;  // indicates -i option (0 = false, 1 = true)
-int numberLines;  // indicates -n option (0 = false, 1 -true)
+int ignoreCase;  // for -i option (0 = false, 1 = true)
+int numberLines;  // for -n option (0 = false, 1 = true)
 
 /* Function declarations */
 int checkflags(int argc, char *argv[]);
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
   } else {
     strncpy(match, argv[i], MAXPATTERN);
   }
-  for (i+=1; i < argc; i++) {
+  for (i+=1; i < argc; ++i) {
     fp = fopen(argv[i], "r");
     if (fp == NULL) {
       fprintf(stderr, "gasp: unable to open %s\n", argv[i]);
@@ -71,17 +71,12 @@ int main(int argc, char *argv[]) {
 */
 int checkflags(int argc, char *argv[]) {
   int i;
-  for (i = 1; i < argc; i++) {
+  for (i = 1; i < argc; ++i) {
     if (strncmp(argv[i], "-i", 3) == 0) {
        ignoreCase = 1;
     } else if (strncmp(argv[i], "-n", 3) == 0) {
        numberLines = 1;
-    } else {
-      if (i == (argc - 1)) {
-         return -1;  // invalid number of arguments
-      }
-      return i;
-    }
+    } return (i == (argc - 1)) ? -1 : i;  // invalid number of arguments
   }
   return -1;  // we may assume options won't occur more than once
 }
@@ -97,13 +92,10 @@ void parsefile(FILE *file, char *match, char *filename) {
   char *compare;  // pointer to line used for comparison
   int i = 0;  // line number
 
-  if (ignoreCase == 1) {
-    compare = copy;
-  } else {
-    compare = line;
-  }
+  compare = (ignoreCase == 1) ? copy : line;
+  
   while (fgets(line, MAXLINE, file) != NULL) {
-    i++;
+    ++i;
     if (ignoreCase == 1) {
       strncpy(copy, line, MAXLINE);
       lowercase(copy);
@@ -125,7 +117,7 @@ void parsefile(FILE *file, char *match, char *filename) {
 char* lowercase(char *str) {
   int length = strlen(str);
   int i;
-  for (i = 0; i < length; i++) {
+  for (i = 0; i < length; ++i) {
     str[i] = tolower(str[i]);
   }
   return str;
