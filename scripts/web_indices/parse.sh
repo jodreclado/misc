@@ -8,12 +8,6 @@ then
    exit 1
 fi 
 
-#if [ -e $1 ]
-#then
-#	echo "$0: output file already exists"  # don't overwrite an existing file
-#	exit 1
-#fi
-
 if [ ! -e $2 ] 
 then
    echo "$0: html file does not exist" 
