@@ -66,19 +66,21 @@ int main(int argc, char *argv[]) {
 
 /*Returns the argv index of the first non-flag argument.
   Also sets ignoreCase and/or numberLines to 1 depending on arguments.
+  Assume that flags won't occur more than once.
   argc: argv index to stop at
   argv: vector of arguments to program
 */
 int checkflags(int argc, char *argv[]) {
   int i;
+  --argc;  // return index ranges from 1 to argc - 1
   for (i = 1; i < argc; ++i) {
     if (strncmp(argv[i], "-i", 3) == 0) {
        ignoreCase = 1;
     } else if (strncmp(argv[i], "-n", 3) == 0) {
        numberLines = 1;
-    } else return (i == (argc - 1)) ? -1 : i;  // invalid number of arguments
+    } else return i;
   }
-  return -1;  // we may assume options won't occur more than once
+  return -1;
 }
 
 /*Reads the file and prints matching lines to stdout.
